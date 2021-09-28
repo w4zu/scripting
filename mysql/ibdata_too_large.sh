@@ -1,4 +1,4 @@
-cd #!/bin/bash
+#!/bin/bash
 DATABASES="$(mysql -e 'show databases \G' | grep "^Database" | grep -v '^Database: mysql$\|^Database: binlog$\|^Database: performance_schema\|^Database: information_schema' | sed 's/^Database: //g')"
 mysqldump --databases $DATABASES -r alldatabases.sql && echo "$DATABASES" | while read -r DB; do
     mysql -e "drop database \`$DB\`"
